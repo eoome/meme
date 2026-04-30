@@ -1,0 +1,26 @@
+# 核心依赖
+PyQt5>=5.15.0,<6.0.0
+PyQtWebEngine>=5.15.0,<6.0.0
+pandas>=1.3.0,<3.0.0
+numpy>=1.20.0
+requests>=2.25.0,<3.0.0
+
+# ML依赖 (训练和推理)
+lightgbm>=3.3.0,<5.0.0
+scikit-learn>=1.0.0,<2.0.0
+joblib>=1.1.0
+
+# 定时任务 (data_updater.py 使用)
+schedule>=1.1.0,<2.0.0
+
+# 类型提示
+typing-extensions>=4.0.0
+
+# 可选依赖 (解锁分钟级K线和全市场快照)
+# pip install akshare>=1.12.0
+
+# 可选依赖 (贝叶斯参数优化)
+# pip install optuna>=3.0.0
+
+# 可选依赖 (配置文件支持)
+# pip install pyyaml>=6.0
