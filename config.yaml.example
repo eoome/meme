@@ -1,0 +1,62 @@
+# meme 配置文件
+# 复制为 config.yaml 即可生效
+# 所有字段均为可选，未设置的使用默认值
+
+http:
+  timeout: 8
+  retries: 2
+  retry_delay: 0.5
+
+ml:
+  enabled: true
+  confidence_threshold: 0.7
+  strong_threshold: 0.85
+  lookback: 20
+  n_estimators: 200
+  learning_rate: 0.05
+  max_depth: 5
+
+backtest:
+  initial_capital: 1000000
+  base_position: 10000
+  trade_unit: 100
+  commission_rate: 0.00015
+  stamp_tax: 0.001
+  # 滑点按品种区分（代码中自动选择）
+  slippage_etf: 0.0002     # ETF 滑点 0.02%
+  slippage_stock: 0.0005   # 股票滑点 0.05%
+  slippage: 0.0            # 兼容旧字段，自动计算
+  market_type: etf         # etf 或 stock
+  max_position_multiplier: 2.0
+  tail_no_trade_minutes: 5
+  min_trade_interval: 5
+  min_signal_confidence: 70.0
+
+stop_loss:
+  type: trailing           # trailing / fixed
+  initial_stop_pct: 0.03   # 初始止损 3%
+  trailing_pct: 0.02       # 跟踪回撤 2%
+
+label:
+  lookback: 3
+  min_return: 0.008
+  max_hold_bars: 20
+  min_spacing: 5
+  noise_filter: 0.003
+  max_drawdown: 0.03
+
+data:
+  kline_count: 800         # 训练拉取日K条数 (800条≈3.3年, 最低500)
+  kline_period: day        # K线周期: day/week/month
+  fetch_delay: 0.3         # 请求间隔(秒), 防限频
+  auto_train: true         # 添加/删除持仓后自动触发增量训练
+  auto_train_delay: 10     # 自动训练防抖延迟(秒), 操作后等这么久再训练
+
+chanlun:
+  bi_min_gap: 3            # 笔内最少K线间隔（经典=5，调小捕捉更多小波动）
+  bi_strict: false         # 严格模式关闭，保留更多笔
+  bi_min_bars: 2           # 严格模式: 笔内最少独立K线数
+  seg_min_strokes: 3       # 线段最少笔数
+  divergence_rate: 0.8     # MACD背驰阈值: 面积比 < 此值视为背驰
+  volume_divergence: true  # 是否启用成交量背驰
+  hub_window: 9            # 中枢扩展最大笔数
